@@ -1,6 +1,7 @@
 import requests
 import shutil
 import os
+from  random import randint
 
 
 def setUp():
@@ -14,11 +15,12 @@ def setUp():
         else:
             start=input("\twant to start wordle (yes or no):")
     return start
+
 def selectType():
     imgType = input("\t1.download Random Image\n\t2.Download Custome Image\n\t enter 1 or 2 :-")
-    if imgType == 1:
+    if imgType == '1':
         image_url = "https://picsum.photos/400"
-    elif imgType == 2:
+    elif imgType == '2':
         image_url = input("enter Image URL to Donwload")
     else :
         print("Wrong Input Try Again")
@@ -28,8 +30,8 @@ def selectType():
 
 
 def downImg():
-        
-        filename = "DownloadedImg.jpg"
+        imgNum =randint(0,100);
+        filename = "Image_"+str(imgNum)+".jpg"
         r = requests.get(selectType(), stream = True)
         if r.status_code == 200:
             r.raw.decode_content = True
@@ -42,4 +44,3 @@ def downImg():
 
 if setUp() == "yes":
     downImg()
-    
